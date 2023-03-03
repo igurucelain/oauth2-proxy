@@ -741,6 +741,7 @@ func (p *OAuthProxy) SignOut(rw http.ResponseWriter, req *http.Request) {
 		p.ErrorPage(rw, req, http.StatusInternalServerError, err.Error())
 		return
 	}
+	redirect = p.provider.GetSignOutURL(redirect)
 	err = p.ClearSessionCookie(rw, req)
 	if err != nil {
 		logger.Errorf("Error clearing session cookie: %v", err)
