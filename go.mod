@@ -9,6 +9,7 @@ require (
 	github.com/bitly/go-simplejson v0.5.0
 	github.com/bsm/redislock v0.8.1
 	github.com/coreos/go-oidc/v3 v3.4.0
+	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/fsnotify/fsnotify v1.6.0
 	github.com/ghodss/yaml v1.0.1-0.20190212211648-25d852aebe32
 	github.com/go-redis/redis/v9 v9.0.0-rc.1
