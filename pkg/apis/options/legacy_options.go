@@ -497,6 +497,9 @@ type LegacyProvider struct {
 	GoogleAdminEmail         string   `flag:"google-admin-email" cfg:"google_admin_email"`
 	GoogleServiceAccountJSON string   `flag:"google-service-account-json" cfg:"google_service_account_json"`
 
+	SISRootURL            string   `flag:"sis-root-url" cfg:"sis_root_url"`
+	ClearExtraCookieNames []string `flag:"clear-extra-cookie-names" cfg:"clear_extra_cookie_names"`
+
 	// These options allow for other providers besides Google, with
 	// potential overrides.
 	ProviderType                       string   `flag:"provider" cfg:"provider"`
@@ -555,6 +558,9 @@ func legacyProviderFlagSet() *pflag.FlagSet {
 	flagSet.String("client-id", "", "the OAuth Client ID: ie: \"123456.apps.googleusercontent.com\"")
 	flagSet.String("client-secret", "", "the OAuth Client Secret")
 	flagSet.String("client-secret-file", "", "the file with OAuth Client Secret")
+
+	flagSet.String("sis-root-url", "", "Stratio SIS root url")
+	flagSet.StringSlice("clear-extra-cookie-names", []string{}, "Clear extra cookies after logout")
 
 	flagSet.String("provider", "google", "OAuth provider")
 	flagSet.String("provider-display-name", "", "Provider display name")
@@ -682,6 +688,12 @@ func (l *LegacyProvider) convert() (Providers, error) {
 		GraphGroupField: l.AzureGraphGroupField,
 	}
 
+	provider.SISConfig = SISOptions{
+		SISRootURL:            l.SISRootURL,
+		ClearExtraCookieNames: l.ClearExtraCookieNames,
+	}
+
+	fmt.Println("Provider type = ", provider.Type)
 	switch provider.Type {
 	case "github":
 		provider.GitHubConfig = GitHubOptions{
