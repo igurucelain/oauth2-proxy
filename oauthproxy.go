@@ -104,8 +104,6 @@ type OAuthProxy struct {
 	serveMux          *mux.Router
 	redirectValidator redirect.Validator
 	appDirector       redirect.AppDirector
-
-	//ClearExtraCookieNames []string
 }
 
 // NewOAuthProxy creates a new instance of OAuthProxy from the options provided
@@ -233,8 +231,6 @@ func NewOAuthProxy(opts *options.Options, validator func(string) bool) (*OAuthPr
 		upstreamProxy:      upstreamProxy,
 		redirectValidator:  redirectValidator,
 		appDirector:        appDirector,
-
-		//ClearExtraCookieNames: opts.ClearExtraCookieNames,
 	}
 	p.buildServeMux(opts.ProxyPrefix)
 
